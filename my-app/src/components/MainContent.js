@@ -5,7 +5,7 @@ function MainContent () {
     let lastName = "Zheng"
     return (
         <main>
-            My name is {firstName + " " + lastName}
+            My name is {`${firstName} ${lastName}`}
         </main>
     )
 }
