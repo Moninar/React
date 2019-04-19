@@ -1,9 +1,11 @@
 import React from "react"
 
 function MainContent () {
+    let firstName = "Zhengyi"
+    let lastName = "Zheng"
     return (
         <main>
-            This is the main content.
+            My name is {firstName + " " + lastName}
         </main>
     )
 }
