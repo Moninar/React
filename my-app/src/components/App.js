@@ -11,8 +11,18 @@ class App extends React.Component {
     constructor() {
         super() 
         this.state = {
-
+            count: 0
         }
+        this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick() {
+        this.setState(prevState => {
+            return {
+                count: prevState.count + 1
+            }
+        })
+
     }
 
     render() {
@@ -31,7 +41,8 @@ class App extends React.Component {
         return (
             <div>
                 <Header />
-                <button onClick={handleClick}>Click me</button>
+                <p>Count: {this.state.count}</p>
+                <button onClick={this.handleClick}>Click me</button>
                 <MainContent />
                 {jokeComponents}
                 {productsComponents}
@@ -41,10 +52,6 @@ class App extends React.Component {
     }
 
 
-}
-
-function handleClick() {
-    console.log("I was clicked")
 }
 
 export default App
