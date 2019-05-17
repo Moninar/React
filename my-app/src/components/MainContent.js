@@ -1,36 +1,44 @@
 import React from "react"
 import TodoItem from "./TodoItem"
 import ContactCard from "./ContactCard"
+import Conditional from "./Conditional"
 import todoItemsData from "./todoItemsData"
 
 class MainContent extends React.Component {
     constructor() {
         super()
         this.state = {
-            todos: todoItemsData
+            todos: todoItemsData,
+            isLoading: true
         }
         this.handleCheckbox = this.handleCheckbox.bind(this)
     }
 
     componentDidMount() {
         // get the data I need to correctly display
+        setTimeout(() => {
+            this.setState({
+                isLoading: false
+            })
+            // console.log("inside the settimeout")
+        }, 2000)
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.whatever !== this.props.whatever) {
-            // do something important here
-        }
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.whatever !== this.props.whatever) {
+    //         // do something important here
+    //     }
+    // }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        // return true if wnat to update
-        // return false if not
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     // return true if wnat to update
+    //     // return false if not
+    // }
 
-    componentWillUnmount() {
-        // tear down or clean up your code before your component is disappeared
-        // (e.g. remove event listeners)
-    }
+    // componentWillUnmount() {
+    //     // tear down or clean up your code before your component is disappeared
+    //     // (e.g. remove event listeners)
+    // }
 
     handleCheckbox(id) {
         this.setState(prevState => {
@@ -50,6 +58,9 @@ class MainContent extends React.Component {
         const todoItemComponent = this.state.todos.map(item => <TodoItem key={item.id} item={item} updatedState={this.handleCheckbox} />)
         return (
             <main>
+                <div>
+                    <Conditional isLoading={this.state.isLoading} />
+                </div>
                 <p>My name is {`${firstName} ${lastName}`}</p>
                 <div className="todo-list">
                     {todoItemComponent}
