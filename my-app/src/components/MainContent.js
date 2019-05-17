@@ -12,6 +12,26 @@ class MainContent extends React.Component {
         this.handleCheckbox = this.handleCheckbox.bind(this)
     }
 
+    componentDidMount() {
+        // get the data I need to correctly display
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.whatever !== this.props.whatever) {
+            // do something important here
+        }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        // return true if wnat to update
+        // return false if not
+    }
+
+    componentWillUnmount() {
+        // tear down or clean up your code before your component is disappeared
+        // (e.g. remove event listeners)
+    }
+
     handleCheckbox(id) {
         this.setState(prevState => {
             const updatedTodos = prevState.todos.map(todo => {
