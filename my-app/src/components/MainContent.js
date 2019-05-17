@@ -9,9 +9,22 @@ class MainContent extends React.Component {
         super()
         this.state = {
             todos: todoItemsData,
-            isLoading: true
+            isLoading: true,
+            unreadMessages: [],
+            isLogin: false
         }
         this.handleCheckbox = this.handleCheckbox.bind(this)
+        this.logginOperation = this.logginOperation.bind(this)
+    }
+
+    logginOperation() {
+        // console.log("clicked for login")
+        this.setState(prevState => {
+            return {
+                isLogin: !prevState.isLogin
+            }
+        })
+        console.log("loading status", this.state.isLogin)
     }
 
     componentDidMount() {
@@ -22,9 +35,10 @@ class MainContent extends React.Component {
             })
             // console.log("inside the settimeout")
         }, 2000)
+
     }
 
-    // componentWillReceiveProps(nextProps) {
+    // componentWillzReceiveProps(nextProps) {
     //     if (nextProps.whatever !== this.props.whatever) {
     //         // do something important here
     //     }
@@ -58,6 +72,12 @@ class MainContent extends React.Component {
         const todoItemComponent = this.state.todos.map(item => <TodoItem key={item.id} item={item} updatedState={this.handleCheckbox} />)
         return (
             <main>
+                <button onClick={this.logginOperation}>{this.state.isLogin ? "Log out" : "Log in"}</button>
+                <div>
+                    {
+                        this.state.unreadMessages.length > 0 && <h1>You have {this.state.unreadMessages.length} message(s) to read</h1>
+                    }
+                </div>
                 <div>
                     <Conditional isLoading={this.state.isLoading} />
                 </div>
