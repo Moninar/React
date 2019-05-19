@@ -70,6 +70,7 @@ class MainContent extends React.Component {
         let firstName = "Zhengyi"
         let lastName = "Zheng"
         const todoItemComponent = this.state.todos.map(item => <TodoItem key={item.id} item={item} updatedState={this.handleCheckbox} />)
+
         return (
             <main>
                 <button onClick={this.logginOperation}>{this.state.isLogin ? "Log out" : "Log in"}</button>
