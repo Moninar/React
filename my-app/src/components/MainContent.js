@@ -9,9 +9,10 @@ class MainContent extends React.Component {
         super()
         this.state = {
             todos: todoItemsData,
-            isLoading: true,
+            isLoading: false,
             unreadMessages: [],
-            isLogin: false
+            isLogin: false,
+            charactor: {}
         }
         this.handleCheckbox = this.handleCheckbox.bind(this)
         this.logginOperation = this.logginOperation.bind(this)
@@ -29,13 +30,20 @@ class MainContent extends React.Component {
 
     componentDidMount() {
         // get the data I need to correctly display
-        setTimeout(() => {
-            this.setState({
-                isLoading: false
-            })
-            // console.log("inside the settimeout")
-        }, 2000)
+        // setTimeout(() => {
+        //     this.setState({
+        //         isLoading: false
+        //     })
+        //     // console.log("inside the settimeout")
+        // }, 2000)
 
+        this.setState({isLoading: true})
+        fetch("https://swapi.co/api/people/1").then(response => response.json()).then(data => {
+            this.setState({
+                isLoading: false,
+                charactor: data
+            })
+        })
     }
 
     // componentWillzReceiveProps(nextProps) {
@@ -70,9 +78,11 @@ class MainContent extends React.Component {
         let firstName = "Zhengyi"
         let lastName = "Zheng"
         const todoItemComponent = this.state.todos.map(item => <TodoItem key={item.id} item={item} updatedState={this.handleCheckbox} />)
+        const text = this.state.isLoading ? "Loading..." : this.state.charactor.name
 
         return (
             <main>
+                <p>{text}</p>
                 <button onClick={this.logginOperation}>{this.state.isLogin ? "Log out" : "Log in"}</button>
                 <div>
                     {
