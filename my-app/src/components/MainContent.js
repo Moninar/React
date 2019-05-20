@@ -13,7 +13,8 @@ class MainContent extends React.Component {
             unreadMessages: [],
             isLogin: false,
             charactor: {},
-            name: ""
+            ["first name"]: "",
+            ["last name"]: ""
         }
         this.handleCheckbox = this.handleCheckbox.bind(this)
         this.logginOperation = this.logginOperation.bind(this)
@@ -78,7 +79,7 @@ class MainContent extends React.Component {
 
     handleName(event) {
         this.setState({
-            name: event.target.value
+            [event.target.name]: event.target.value
         })
     }
 
@@ -91,8 +92,10 @@ class MainContent extends React.Component {
         return (
             <main>
                 <form>
-                    <input type="text" placeholder="Name" onChange={this.handleName} />
-                    <h1>{this.state.name}</h1>
+                    <input type="text" name="first name" value={this.state["first name"]} placeholder="first name" onChange={this.handleName} />
+                    <br />
+                    <input type="text" name="last name" value={this.state["last name"]} placeholder="last name" onChange={this.handleName}/>
+                    <h1>{this.state["first name"]} {this.state["last name"]}</h1>
                 </form>
                 <p>{text}</p>
                 <button onClick={this.logginOperation}>{this.state.isLogin ? "Log out" : "Log in"}</button>
