@@ -14,11 +14,14 @@ class MainContent extends React.Component {
             isLogin: false,
             charactor: {},
             ["first name"]: "",
-            ["last name"]: ""
+            ["last name"]: "",
+            isFriendly: false,
+            gender: "",
+            favColor: "red"
         }
         this.handleCheckbox = this.handleCheckbox.bind(this)
         this.logginOperation = this.logginOperation.bind(this)
-        this.handleName = this.handleName.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
 
     logginOperation() {
@@ -77,9 +80,11 @@ class MainContent extends React.Component {
         })
     }
 
-    handleName(event) {
+    handleChange(event) {
+        const {name, value, type, checked} = event.target
+        type === 'checkbox' ? this.setState({[name]: checked}) : 
         this.setState({
-            [event.target.name]: event.target.value
+            [name]: value
         })
     }
 
@@ -92,10 +97,28 @@ class MainContent extends React.Component {
         return (
             <main>
                 <form>
-                    <input type="text" name="first name" value={this.state["first name"]} placeholder="first name" onChange={this.handleName} />
+                    <input type="text" name="first name" value={this.state["first name"]} placeholder="first name" onChange={this.handleChange} />
                     <br />
-                    <input type="text" name="last name" value={this.state["last name"]} placeholder="last name" onChange={this.handleName}/>
+                    <input type="text" name="last name" value={this.state["last name"]} placeholder="last name" onChange={this.handleChange}/>
+                    <br />
+                    <textarea value="Some Defult Value" onChange={this.handleChange} />
+                    <br />
+                    <input type="checkbox" name="isFriendly" checked={this.state.isFriendly} onChange={this.handleChange} />
+                    <br />
+                    <input type="radio" name="gender" value="male" checked={this.state.gender === "male"} onChange={this.handleChange} /> Male 
+                    <br />
+                    <input type="radio" name="gender" value="female" checked={this.state.gender === "female"} onChange={this.handleChange} /> Female
+                    <br />
+                    <select value={this.state.favColor} name="favColor" onChange={this.handleChange}>
+                        <option type="red">red</option>
+                        <option type="blue">blue</option>
+                        <option type="purple">purple</option>
+                        <option type="light">light</option>
+                        <option type="orange">orange</option>
+                    </select>
+                    
                     <h1>{this.state["first name"]} {this.state["last name"]}</h1>
+                    <h1>Your favColor: {this.state.favColor}</h1>
                 </form>
                 <p>{text}</p>
                 <button onClick={this.logginOperation}>{this.state.isLogin ? "Log out" : "Log in"}</button>
