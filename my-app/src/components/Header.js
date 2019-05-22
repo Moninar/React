@@ -2,14 +2,10 @@ import React from "react"
 
 function Header() {
     return (
-        <nav>
-            <h1 className="navheader">This is the header</h1>
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-            </ul>
-        </nav>
+        <header>
+            <img src="http://www.pngall.com/wp-content/uploads/2016/05/Trollface.png" alt="some problem happened" />
+            <p>Meme Generator</p>
+        </header>
     )
 }
 
