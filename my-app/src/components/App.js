@@ -6,6 +6,7 @@ import Joke from "./Joke"
 import jokesData from "./jokesData"
 import productsData from "./productsData"
 import Product from "./Product"
+import MemeGenerator from "./MemeGenerator"
 
 class App extends React.Component {
     constructor() {
@@ -41,6 +42,7 @@ class App extends React.Component {
         return (
             <div>
                 <Header />
+                <MemeGenerator />
                 <p>Count: {this.state.count}</p>
                 <button onClick={this.handleClick}>Click me</button>
                 <MainContent />
