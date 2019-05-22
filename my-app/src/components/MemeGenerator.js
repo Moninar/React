@@ -4,9 +4,12 @@ class MemeGenerator extends Component {
     constructor() {
         super()
         this.state = {
+            topText: "",
+            bottomText: "",
             randomImg: "http://i.imgflip.com/1bij.jpg",
             allMemeImgs: []
         }
+        this.handleChange = this.handleChange.bind(this)
     }
 
     componentDidMount() {
@@ -18,14 +21,24 @@ class MemeGenerator extends Component {
             })
     }
 
+    handleChange(event) {
+        const {name, value} = event.target
+        this.setState({
+            [name]: value
+        })
+    }
+
     render() {
         return (
             <div>
                 <form>
-
+                    <input type="text" name="topText" value={this.state.topText} placeholder="top text" onChange={this.handleChange} />
+                    <input type="text" name="bottomText" value={this.state.bottomText} placeholder="bottom text" onChange={this.handleChange} />
                 </form>
                 <div className="meme">
                     <img src={this.state.randomImg} alt="" />
+                    <h2 className="top">{this.state.topText}</h2>
+                    <h2 className="bottom">{this.state.bottomText}</h2>
                 </div>
             </div>
         )
